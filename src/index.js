@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+class ColoredDiv extends React.Component{
+    render() {
+        const {color, fontSize: fz } = this.props;
+        return <div style={{background: this.props.bgColor, color, fontSize: fz}}>Me colored, yay!</div>
+    }
+}
+
+ReactDOM.render(<ColoredDiv color="red" bgColor="green" fontSize="14px"/>, document.getElementById('root'));
+
+
+// registerServiceWorker();
