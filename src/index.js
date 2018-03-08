@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 
 class ColoredDiv extends React.Component{
 	render() {
-		const {color, fontSize: fz } = this.props;
+		const {color, fontSize: fz, rows } = this.props;
 		return (<div style={{background: this.props.bgColor, color, fontSize: fz}}>
-			{Math.random() >= 0.5 ? 'Me colored, yay!' : 'Me no random!'}
+			{rows.map(row => <li>{row}</li>)}
 		</div>);
 	}
 }
 
-ReactDOM.render(<ColoredDiv color="red" bgColor="green" fontSize="14px"/>, document.getElementById('root'));
+ReactDOM.render(<ColoredDiv color="#ab00ff" bgColor="white" fontSize="14px" rows={['Me colored, yay!', 'Me colored, nope second try!', 'No random is it!', ]}/>, document.getElementById('root'));
 
 
 // registerServiceWorker();
