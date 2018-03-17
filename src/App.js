@@ -1,21 +1,55 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+const LabeledInput = ({children, name, value, onChange, type="text"}) =>
+console.log(children) || <div className="input-group">
+	<label htmlFor={name}>{children} </label>
+	<input type={type} id={name} name={name} value={value} onChange={onChange}/>
+</div>
+
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+	// constructor(p) {
+	//     super(p);
+	//     this.state = {
+	//         demo: '',
+	//         name: '',
+	//         password: ''
+	//     }
+	// }
+	state = {
+		demo: '',
+		name: '',
+		password: ''
+	}
+	render() {
+		const handleInput = (e) => this.setState({
+			[e.target.name]: e.target.value
+		});
+		const {
+			demo, name, password
+		} = this.state;
+		return (<div className="form-container App">
+			<form action="" onSubmit={(e) => e.preventDefault() || console.log(this.state)}>
+				<LabeledInput value={demo} name="demo" onChange={handleInput}>
+					First label text
+					<LabeledInput value={name}></LabeledInput>
+				</LabeledInput>
+				<LabeledInput value={name} name="name" onChange={handleInput}>
+					Namu?
+				</LabeledInput>
+				<LabeledInput value={password} name="password"onChange={handleInput} type="password">
+					Passwort
+				</LabeledInput>
+			</form>
+			<div class="output">
+				{
+					Object.entries(this.state).map(arr =>
+						arr[1] !== '' && <div>{arr[0]}: {arr[1]}</div>
+					)
+				}
+			</div>
+		</div>);
+	}
 }
 
 export default App;
