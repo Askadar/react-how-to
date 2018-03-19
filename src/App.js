@@ -32,7 +32,6 @@ class App extends Component {
 			<form action="" onSubmit={(e) => e.preventDefault() || console.log(this.state)}>
 				<LabeledInput value={demo} name="demo" onChange={handleInput}>
 					First label text
-					<LabeledInput value={name}></LabeledInput>
 				</LabeledInput>
 				<LabeledInput value={name} name="name" onChange={handleInput}>
 					Namu?
@@ -41,7 +40,7 @@ class App extends Component {
 					Passwort
 				</LabeledInput>
 			</form>
-			<div class="output">
+			<div className="output">
 				{
 					Object.entries(this.state).map(arr =>
 						arr[1] !== '' && <div>{arr[0]}: {arr[1]}</div>
