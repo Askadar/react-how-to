@@ -39,6 +39,7 @@ class App extends Component {
 				<LabeledInput value={password} name="password"onChange={handleInput} type="password">
 					Passwort
 				</LabeledInput>
+				<button type="submit">Fly, fly like a butterfly!</button>
 			</form>
 			<div className="output">
 				{
