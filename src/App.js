@@ -1,55 +1,64 @@
 import React, { Component } from 'react';
 import './App.css';
 
-const LabeledInput = ({children, name, value, onChange, type="text"}) =>
-console.log(children) || <div className="input-group">
-	<label htmlFor={name}>{children} </label>
-	<input type={type} id={name} name={name} value={value} onChange={onChange}/>
-</div>
-
-class App extends Component {
-	// constructor(p) {
-	//     super(p);
-	//     this.state = {
-	//         demo: '',
-	//         name: '',
-	//         password: ''
-	//     }
-	// }
+class FormField extends Component {
 	state = {
-		demo: '',
-		name: '',
-		password: ''
+		focused: false,
+	}
+	render() {
+		const { label, name, type = 'text', value, onChange } = this.props;
+		return (
+			<div className="field-row">
+				<label className="field-label" htmlFor={name}>{label}</label>
+				<input className={`field-input field-input-${type}`} type={type} id={name} name={name} value={value} onChange={onChange}/>
+			</div>
+		);
+	}
+}
+
+class Form extends Component {
+	state = {
+		fieldValues: {}
 	}
 	render() {
 		const handleInput = (e) => this.setState({
 			[e.target.name]: e.target.value
 		});
 		const {
+			fieldValues,
 			demo, name, password
 		} = this.state;
+		const {
+			method, fields, className,
+		} = this.props;
 		return (<div className="form-container App">
-			<form action="" onSubmit={(e) => e.preventDefault() || console.log(this.state)}>
-				<LabeledInput value={demo} name="demo" onChange={handleInput}>
-					First label text
-				</LabeledInput>
-				<LabeledInput value={name} name="name" onChange={handleInput}>
-					Namu?
-				</LabeledInput>
-				<LabeledInput value={password} name="password"onChange={handleInput} type="password">
-					Passwort
-				</LabeledInput>
-				<button type="submit">Fly, fly like a butterfly!</button>
-			</form>
-			<div className="output">
+			<form
+				action="#" method={method} className={className}
+				onSubmit={(e) => e.preventDefault()}>
 				{
-					Object.entries(this.state).map(arr =>
-						arr[1] !== '' && <div>{arr[0]}: {arr[1]}</div>
+					fields.map(({label, name, type}) =>
+					<FormField
+						label={label}
+						name={name}
+						value={fieldValues[name]}
+						type={type}
+						onChange={e => this.setState({[name]: e.target.value})}
+					/>
 					)
 				}
-			</div>
+			</form>
 		</div>);
 	}
 }
+const App = () =>
+<div className="form-container App">
+	<Form action="#" method="POST" className="zn-form"
+		fields={[
+			{label: 'Your name', name: 'name', required: true},
+			{label: 'Your e-mail', name: 'email', type: 'email', required: true},
+			{label: 'Password', name: 'password', type: 'password', required: true},
+			{label: 'Your hobby?', name: 'extra'},
+		]}/>
+</div>
 
 export default App;
