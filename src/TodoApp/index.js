@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TodoList from './TodoList';
+import Header from './Header';
 
 // const boundHandlers = (thisRef, setKey, handlers) =>
 // Object.entries(handlers)
@@ -14,10 +15,13 @@ import './todo.css';
 class TodoApp extends Component {
 	render() {
 		return (
-			<TodoList
-				setKey="today"
-				todosLabel="ToDo ToDay"
-			/>
+			<div>
+				<Header/>
+				<TodoList
+					setKey="today"
+					todosLabel="ToDo ToDay"
+				/>
+			</div>
 		);
 	}
 }

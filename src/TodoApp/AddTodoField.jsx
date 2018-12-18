@@ -10,7 +10,7 @@ class AddTodoField extends React.Component {
 	render(){
 		const { onTodoAdd } = this.props;
 		const { newTodoText } = this.state;
-		const addTodo = (e) => e.preventDefault() || onTodoAdd(newTodoText) && this.setState({newTodoText: ''});
+		const addTodo = (e) => e.preventDefault() || ( onTodoAdd(newTodoText) && this.setState({newTodoText: ''}) );
 		return (
 			<form className="todo-add" onSubmit={addTodo}>
 				<label className={
